@@ -95,7 +95,7 @@ class Bulk
 			'batch_data' => $this->generateCSV(),
 		];
 		
-		if(isset($this->sender)
+		if(isset($this->sender))
 		{
 			$data['sender'] = $this->sender;
 		}
