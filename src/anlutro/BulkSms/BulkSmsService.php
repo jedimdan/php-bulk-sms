@@ -85,12 +85,19 @@ class BulkSmsService
 	 * Send messages in bulk.
 	 *
 	 * @param  array  $messages associative array of recipient => message
+	 * @param  string $senderId (optional) If you wish to set the sender Id,
+	 *   you can pass it here
 	 *
 	 * @return mixed
 	 */
-	public function sendBulkMessages(array $messages)
+	public function sendBulkMessages(array $messages, $senderId = null)
 	{
 		$sender = $this->createBulkSender();
+		
+		if($senderId)
+		{
+			$sender->setSender($senderId);
+		}
 
 		foreach ($messages as $recipient => $message) {
 			$msg = $this->createMessage($recipient, $message);

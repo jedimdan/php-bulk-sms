@@ -67,6 +67,16 @@ class Bulk
 
 		$this->messages =+ $filteredMessages;
 	}
+	
+	/**
+	 * Set sender ID for this request.
+	 * 
+	 * @param string $senderId
+	 */
+	public function setSender($senderId)
+	{
+		$this->sender = $senderId;
+	}
 
 	/**
 	 * Send the queued messages.
@@ -84,6 +94,11 @@ class Bulk
 			'password' => $this->password,
 			'batch_data' => $this->generateCSV(),
 		];
+		
+		if(isset($this->sender)
+		{
+			$data['sender'] = $this->sender;
+		}
 
 		return $this->curl->post($this->url, $data);
 	}
