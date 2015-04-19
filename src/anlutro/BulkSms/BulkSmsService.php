@@ -112,7 +112,7 @@ class BulkSmsService
 	 *
 	 * @param  anlutro\cURL\Response $response
 	 *
-	 * @return boolean
+	 * @return batch_id if successful
 	 */
 	public function parseResponse($response)
 	{
@@ -129,7 +129,7 @@ class BulkSmsService
 		$code = (int) $parts[0];
 
 		if ($code === 0 || $code === 1) {
-			return true;
+			return (int) $parts[2];
 		} else {
 			$message = array_key_exists($code, static::$statusMessages)
 				? static::$statusMessages[$code]
