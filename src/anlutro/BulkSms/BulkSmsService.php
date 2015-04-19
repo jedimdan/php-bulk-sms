@@ -67,12 +67,18 @@ class BulkSmsService
 	 *
 	 * @param  string $recipient
 	 * @param  string $message
+	 * @param  string $senderId (optional) If you wish to set the sender Id,
+	 *	 								   you can pass it here
 	 *
 	 * @return mixed
 	 */
-	public function sendMessage($recipient, $message)
+	public function sendMessage($recipient, $message, $senderId = null)
 	{
 		$sender = $this->createMessageSender();
+		if($senderId)
+		{
+			$sender->setSender($senderId);
+		}
 
 		$msg = $this->createMessage($recipient, $message);
 

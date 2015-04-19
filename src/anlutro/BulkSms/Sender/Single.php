@@ -60,6 +60,16 @@ class Single
 	{
 		$this->message = $message;
 	}
+	
+	/**
+	 * Set Sender ID for this message.
+	 * 
+	 * @param string $senderId
+	 */
+	public function setSender($senderId)
+	{
+		$this->sender = $senderId;
+	}
 
 	/**
 	 * Send the message.
@@ -74,6 +84,11 @@ class Single
 			'message' => $this->message->getMessage(),
 			'msisdn' => $this->message->getRecipient(),
 		];
+		
+		if(isset($this->sender))
+		{
+			$data['sender'] = $this->sender;
+		}
 
 		$concat = $this->message->getConcatParts();
 
